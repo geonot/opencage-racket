@@ -22,17 +22,16 @@ jobs:
         with:
           version: ${{ matrix.racket-version }}
       - name: Install Package (link)
-        run: raco pkg install --auto --name opencage ./racket
+        run: raco pkg install --auto --name opencage .
       - name: Build & Docs
         run: raco setup -l opencage
       - name: Run Tests
         env:
           # Optionally set OPENCAGE_API_KEY in repo secrets to exercise network tests fully
           OPENCAGE_API_KEY: ${{ secrets.OPENCAGE_API_KEY }}
-        run: raco test -x -p opencage || raco test racket/tests
+        run: raco test -x -p opencage || raco test tests
       - name: Scribble Docs (HTML)
-        run: |
-          raco scribble --htmls --dest scribble-out racket/scribblings/opencage.scrbl
+        run: raco scribble --htmls --dest scribble-out scribblings/opencage.scrbl
       - name: Archive Docs
         uses: actions/upload-artifact@v4
         with:
