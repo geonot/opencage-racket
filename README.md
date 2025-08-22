@@ -8,7 +8,7 @@ Status: Published on the Racket package catalog.
 | Service | Status |
 |---------|--------|
 | Package | [opencage](https://pkgd.racket-lang.org/pkgn/package/opencage) |
-| CI      | ![CI](https://github.com/geonot/opencage-racket/actions/workflows/ci.yml/badge.svg) |
+| CI      | [![CI](https://github.com/geonot/opencage-racket/actions/workflows/ci.yml/badge.svg)](https://github.com/geonot/opencage-racket/actions/workflows/ci.yml) |
 
 ## Features
 
