@@ -4,8 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-INFO_VERSION=$(grep -E '^\(define version' info.rkt | sed -E 's/.*"([^"]+)".*/\1/')
-CLIENT_VERSION=$(grep -E 'OPCAGE-VERSION' client.rkt | sed -E 's/.*"([^"]+)".*/\1/')
+INFO_VERSION=$(grep -E '^\(define version' info.rkt | head -n1 | sed -E 's/.*"([^"]+)".*/\1/')
+CLIENT_VERSION=$(grep -E '^\(define OPCAGE-VERSION' client.rkt | head -n1 | sed -E 's/.*"([^"]+)".*/\1/')
 
 if [[ "$INFO_VERSION" != "$CLIENT_VERSION" ]]; then
   echo "Version mismatch: info.rkt=$INFO_VERSION client=$CLIENT_VERSION" >&2
