@@ -3,7 +3,12 @@ OpenCage Geocoding SDK for Racket
 
 Lightweight Racket client for the [OpenCage Geocoding API](https://opencagedata.com/api).
 
-Status: initial alpha (unpublished package). Feedback welcome.
+Status: Published on the Racket package catalog.
+
+| Service | Status |
+|---------|--------|
+| Package | (pending badge) |
+| CI      | ![CI](https://github.com/geonot/opencage-racket/actions/workflows/ci.yml/badge.svg) |
 
 ## Features
 
@@ -17,11 +22,19 @@ Status: initial alpha (unpublished package). Feedback welcome.
 - Custom extra headers & proper User-Agent per SDK guidelines
 - Library version accessor (`opencage-version`)
 
-## Install (local checkout)
+## Install
 
-Clone into a directory on your Racket `PLTCOLLECTS` path or use `raco pkg install` pointing to the folder:
+From the package catalog (preferred):
 
 ```sh
+raco pkg install opencage
+```
+
+From a Git clone (development):
+
+```sh
+git clone https://github.com/geonot/opencage-racket.git
+cd opencage-racket
 raco pkg install --name opencage ./racket
 ```
 
@@ -119,11 +132,11 @@ MIT – see `LICENSE`.
 
 ## Roadmap
 
-- Add batching helpers
-- Add structured types for components
-- Add automatic retry on 502/503 with backoff
-- Publish to Racket package catalog
-- Add Scribble reference docs
+- Batching helpers
+- Structured component accessors
+- Automatic retry/backoff on transient errors
+- Additional test coverage (mock HTTP)
+- Enriched Scribble docs with examples
 
 ## CI & Releases
 
@@ -137,5 +150,15 @@ First time publishing:
 3. Submit the repo URL to https://pkgs.racket-lang.org/ (only once).
 
 After initial submission, pushing a new tag picked up by the package index.
+
+### Versioning
+
+Version numbers follow Racket package canonical rules:
+
+- Omit trailing `.0` (use `1.1` not `1.1.0`).
+- Patch releases increment a non-zero third component (e.g. `1.0.2`).
+- Feature releases bump the minor (e.g. `1.1`).
+
+The library also exposes `opencage-version` for runtime inspection.
 
 PRs & issues welcome.
