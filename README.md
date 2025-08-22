@@ -125,4 +125,17 @@ MIT – see `LICENSE`.
 - Publish to Racket package catalog
 - Add Scribble reference docs
 
+## CI & Releases
+
+Continuous integration: GitHub Actions workflow (`.github/workflows/ci.yml`) runs tests across several Racket versions. Network tests are skipped unless `OPENCAGE_API_KEY` is supplied as a repository secret.
+
+Release helper script: `scripts/publish.sh` verifies version consistency (between `info.rkt` and `client.rkt`), creates a version tag `vX.Y.Z`, and pushes it.
+
+First time publishing:
+1. Ensure version updated in `info.rkt` and `client.rkt` (`OPCAGE-VERSION`).
+2. Run `scripts/publish.sh`.
+3. Submit the repo URL to https://pkgs.racket-lang.org/ (only once).
+
+After initial submission, pushing a new tag picked up by the package index.
+
 PRs & issues welcome.
