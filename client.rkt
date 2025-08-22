@@ -36,7 +36,7 @@
 
 (define (base-url) (string-append "https://" HOST PATH))
 
-(define OPCAGE-VERSION "0.1.0")
+(define OPCAGE-VERSION "1.0.0")
 
 (define (opencage-version) OPCAGE-VERSION)
 
