@@ -1,0 +1,1 @@
+("8.16" ta6le ("7ea8aec1b9ca6b2d39e4b53cd2db400f3725671c" . "a64291a663694c014f1d9bfc231cea96c1cba5cb") (collects #"opencage" #"main.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"rackunit" #"main.rkt"))

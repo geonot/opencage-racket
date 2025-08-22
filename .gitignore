@@ -1,0 +1,28 @@
+# Racket build artifacts
+compiled/
+
+# Scribble generated docs (if built locally)
+**/scribblings/*.html
+**/scribblings/*.css
+**/scribblings/*-index.json
+
+# Editor/OS cruft
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Environment / secrets
+.env
+.env.*
+
+# Coverage / profiling
+coverage/
+profiler-output/
+
+# Logs
+*.log
+
+# Cache
+.cache/
