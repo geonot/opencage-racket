@@ -8,32 +8,51 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build-test:
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        racket-version: [ "8.12", "8.14", "8.16", "current" ]
+        racket-version: [ "8.14", "8.16", "8.18", "current" ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Cache Racket pkg dir
+        uses: actions/cache@v4
+        with:
+          path: ~/.racket
+          key: racket-${{ matrix.racket-version }}-${{ hashFiles('info.rkt') }}
       - name: Setup Racket
         uses: Bogdanp/setup-racket@v1
         with:
           version: ${{ matrix.racket-version }}
-      - name: Install Package (link)
+      - name: Install Package
         run: raco pkg install --auto --name opencage .
-      - name: Build & Docs
+      - name: Build
         run: raco setup -l opencage
-      - name: Run Tests
+      - name: Run Tests (offline-safe)
         env:
-          # Optionally set OPENCAGE_API_KEY in repo secrets to exercise network tests fully
           OPENCAGE_API_KEY: ${{ secrets.OPENCAGE_API_KEY }}
-        run: raco test -x -p opencage || raco test tests
-      - name: Scribble Docs (HTML)
+          PLT_PKG_BUILD_SERVICE: 1
+          CI: true
+        run: raco test -x -p opencage
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Racket (current)
+        uses: Bogdanp/setup-racket@v1
+        with:
+          version: current
+      - name: Install Package
+        run: raco pkg install --auto --name opencage .
+      - name: Build Docs
+        run: raco setup -l opencage
+      - name: Generate HTML (standalone)
         run: raco scribble --htmls --dest scribble-out scribblings/opencage.scrbl
       - name: Archive Docs
         uses: actions/upload-artifact@v4
         with:
-          name: docs-${{ matrix.racket-version }}
+          name: docs
           path: scribble-out
