@@ -2,12 +2,13 @@
 (require rackunit opencage)
 
 (define api-key (getenv "OPENCAGE_API_KEY"))
+(define build-service? (or (getenv "PLT_PKG_BUILD_SERVICE") (getenv "CI")))
 
 (test-case "client construction"
   (define c (make-opencage-client (or api-key "DUMMY") #:defaults '((language . "en") (no_dedupe . #t))))
   (check-true (opencage-client? c)))
 
-(when api-key
+(when (and api-key (not build-service?))
   (test-case "forward geocode basic"
     (define c (make-opencage-client api-key))
     (define r (opencage-geocode c "Berlin" #:params '(limit 1)))
@@ -28,5 +29,7 @@
       (check-equal? resp-remaining client-remaining)
       (check-true (exact-nonnegative-integer? resp-remaining)))))
 
+(when (and api-key build-service?)
+  (displayln "Skipping network tests (package build service / CI offline)"))
 (unless api-key
   (displayln "Skipping network tests (no OPENCAGE_API_KEY set)"))
