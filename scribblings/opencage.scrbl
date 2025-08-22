@@ -4,7 +4,9 @@
 @(the-eval '(require opencage))
 
 @title{OpenCage Geocoding Client for Racket}
-@author+email[(author "OpenCage SDK Contributors") (email "support@opencagedata.com")]
+@author{OpenCage SDK Contributors}
+
+@defmodule[opencage]
 
 @section{Overview}
 The @racketmodname[opencage] library provides a lightweight interface to the
