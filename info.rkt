@@ -1,6 +1,6 @@
 #lang info
 (define collection "opencage")
-(define deps '("base" "net-lib" "json"))
+(define deps '("base" "net-lib" "json-lib"))
 (define pkg-desc "OpenCage Geocoding API client for Racket")
 (define version "1.0.5")
 (define license 'MIT)
