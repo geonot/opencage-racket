@@ -29,7 +29,7 @@ jobs:
           distribution: full
           variant: CS
       - name: Install Package
-        run: raco pkg install --auto --name opencage .
+        run: raco pkg install --auto --name opencage "$GITHUB_WORKSPACE"
       - name: Build
         run: raco setup -l opencage
       - name: Run Tests (offline-safe)
@@ -52,7 +52,7 @@ jobs:
           distribution: full
           variant: CS
       - name: Install Package
-        run: raco pkg install --auto --name opencage .
+        run: raco pkg install --auto --name opencage "$GITHUB_WORKSPACE"
       - name: Build Docs
         run: raco setup -l opencage
       - name: Generate HTML (standalone)
