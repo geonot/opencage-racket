@@ -1,6 +1,6 @@
 #lang info
 (define collection "opencage")
-(define deps '("base"))
+(define deps '("base" "net-lib" "json"))
 (define pkg-desc "OpenCage Geocoding API client for Racket")
 (define version "1.0.3")
 (define license '(MIT))
@@ -10,5 +10,5 @@
 (define tags '(geocode geocoding geolocation opencage))
 (define scribblings '(("scribblings/opencage.scrbl" (multi-page) (library))))
 (define authors '("OpenCage SDK Contributors"))
-(define build-deps '("rackunit-lib"))
+(define build-deps '("rackunit-lib" "scribble-lib"))
 (define test-deps '("rackunit-lib"))
