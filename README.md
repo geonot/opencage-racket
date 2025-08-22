@@ -22,20 +22,39 @@ Status: Published on the Racket package catalog.
 - Custom extra headers & proper User-Agent per SDK guidelines
 - Library version accessor (`opencage-version`)
 
-## Install
+## Install / Manage
 
-From the package catalog (preferred):
+Catalog install (preferred):
 
 ```sh
 raco pkg install opencage
 ```
 
-From a Git clone (development):
+Update to latest (catalog checksums drive updates, not just version field):
+
+```sh
+raco pkg update opencage
+```
+
+Remove:
+
+```sh
+raco pkg remove opencage
+```
+
+Local development (link the working directory so edits are live):
 
 ```sh
 git clone https://github.com/geonot/opencage-racket.git
-cd opencage-racket
-raco pkg install --name opencage ./racket
+cd opencage-racket/racket
+raco pkg install --link
+```
+
+To switch back to catalog version later:
+
+```sh
+raco pkg remove opencage
+raco pkg install opencage
 ```
 
 ## Usage

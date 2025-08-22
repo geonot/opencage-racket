@@ -11,3 +11,4 @@
 (define scribblings '(("scribblings/opencage.scrbl")))
 (define authors '("OpenCage SDK Contributors"))
 (define build-deps '("rackunit-lib"))
+(define test-deps '("rackunit-lib"))
