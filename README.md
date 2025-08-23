@@ -3,8 +3,6 @@ OpenCage Geocoding SDK for Racket
 
 Lightweight Racket client for the [OpenCage Geocoding API](https://opencagedata.com/api).
 
-Status: Published on the Racket package catalog.
-
 | Service | Status |
 |---------|--------|
 | Package | [opencage](https://pkgd.racket-lang.org/pkgn/package/opencage) |
@@ -16,11 +14,6 @@ Status: Published on the Racket package catalog.
 - Reverse geocoding (`opencage-reverse`)
 - Simple client object with default params
 - Optional params via keywords (as a hash, alist, or plist)
-- Rate‑limit header exposure (remaining & reset epoch)
-- Structured error with response body & status code
-- Skips network tests automatically when no API key present
-- Custom extra headers & proper User-Agent per SDK guidelines
-- Library version accessor (`opencage-version`)
 
 ## Install / Manage
 
@@ -50,22 +43,12 @@ cd opencage-racket/racket
 raco pkg install --link
 ```
 
-To switch back to catalog version later:
-
-```sh
-raco pkg remove opencage
-raco pkg install opencage
-```
-
 ## Usage
 
 ```racket
 #lang racket
 (require opencage)
 
-;; API key must be provided via environment:
-;;   export OPENCAGE_API_KEY=YOUR_REAL_KEY
-;; Get a key: https://opencagedata.com/
 (define api-key
   (or (getenv "OPENCAGE_API_KEY")
       (error 'opencage "OPENCAGE_API_KEY not set")))
@@ -104,11 +87,9 @@ Pass via `#:params` as any of:
 Common params (see full API docs):
 
 ```
-q (handled internally), limit, language, countrycode, bounds, proximity,
+q, limit, language, countrycode, bounds, proximity,
 no_annotations, no_dedupe, abbrv, roadinfo, min_confidence, pretty
 ```
-
-Boolean values are converted to `1` / `0` automatically.
 
 ### Error Handling
 
@@ -121,16 +102,11 @@ Network & API errors raise `exn:fail:opencage`:
   (opencage-geocode c "NonexistentPlace123456"))
 ```
 
-### Rate Limits
-
-Expose headers: `X-RateLimit-Remaining`, `X-RateLimit-Reset`.
-
 ### Tests
 
 ```sh
 raco test opencage/tests
 ```
-If `OPENCAGE_API_KEY` is absent, network tests are skipped.
 
 ## API Surface
 
@@ -149,35 +125,6 @@ opencage-version
 
 MIT – see `LICENSE`.
 
-## Roadmap
-
-- Batching helpers
-- Structured component accessors
-- Automatic retry/backoff on transient errors
-- Additional test coverage (mock HTTP)
-- Enriched Scribble docs with examples
-
-## CI & Releases
-
-Continuous integration: GitHub Actions workflow (`.github/workflows/ci.yml`) runs tests across several Racket versions. Network tests are skipped unless `OPENCAGE_API_KEY` is supplied as a repository secret.
-
-Release helper script: `scripts/publish.sh` verifies version consistency (between `info.rkt` and `client.rkt`), creates a version tag `vX.Y.Z`, and pushes it.
-
-First time publishing:
-1. Ensure version updated in `info.rkt` and `client.rkt` (`OPCAGE-VERSION`).
-2. Run `scripts/publish.sh`.
-3. Submit the repo URL to https://pkgs.racket-lang.org/ (only once).
-
-After initial submission, pushing a new tag picked up by the package index.
-
-### Versioning
-
-Version numbers follow Racket package canonical rules:
-
-- Omit trailing `.0` (use `1.1` not `1.1.0`).
-- Patch releases increment a non-zero third component (e.g. `1.0.2`).
-- Feature releases bump the minor (e.g. `1.1`).
-
-The library also exposes `opencage-version` for runtime inspection.
+## Contributing
 
 PRs & issues welcome.
