@@ -45,6 +45,7 @@ raco pkg install --link
 
 ## Usage
 
+
 ```racket
 #lang racket
 (require opencage)
@@ -54,11 +55,11 @@ raco pkg install --link
       (error 'opencage "OPENCAGE_API_KEY not set")))
 
 (define c
-        (make-opencage-client api-key
-                                                                                                #:defaults '((language . "en")
-                                                                                                                                                 (no_annotations . #t))
-                                                                                                ;; You can supply arbitrary additional headers if needed:
-                                                                                                #:extra-headers '(("X-My-App" . "demo"))))
+  (make-opencage-client api-key
+                        #:defaults '((language . "en")
+                                     (no_annotations . #t))
+                        ;; You can supply arbitrary additional headers if needed:
+                        #:extra-headers '(("X-My-App" . "demo"))))
 
 ;; Forward geocode
 (define resp (opencage-geocode c "Berlin" #:params '((limit . 1))))
@@ -96,10 +97,12 @@ no_annotations, no_dedupe, abbrv, roadinfo, min_confidence, pretty
 Network & API errors raise `exn:fail:opencage`:
 
 ```racket
-(with-handlers ([exn:fail:opencage? (λ(e) (printf "Error ~a: ~a\n"
-                                                 (exn:fail:opencage-status-code e)
-                                                 (exn-message e)))])
-  (opencage-geocode c "NonexistentPlace123456"))
+(with-handlers ([exn:fail:opencage?
+                                                                 (λ (e)
+                                                                         (printf "Error ~a: ~a\n"
+                                                                                                         (exn:fail:opencage-status-code e)
+                                                                                                         (exn-message e)))])
+        (opencage-geocode c "NonexistentPlace123456"))
 ```
 
 ### Tests
