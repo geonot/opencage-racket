@@ -2,7 +2,7 @@
 (define collection "opencage")
 (define deps '("base" "net-lib" "racket-lib"))
 (define pkg-desc "OpenCage Geocoding API client for Racket")
-(define version "1.0.7")
+(define version "1.0.8")
 (define license 'MIT)
 (define license-file "LICENSE")
 (define homepage "https://github.com/geonot/opencage-racket")
