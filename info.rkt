@@ -10,5 +10,5 @@
 (define tags '(geocode geocoding geolocation opencage))
 (define scribblings '(("scribblings/opencage.scrbl" (multi-page) (library))))
 (define authors '("OpenCage SDK Contributors"))
-(define build-deps '("rackunit-lib" "scribble-lib"))
+(define build-deps '("rackunit-lib" "scribble-lib" "racket-doc"))
 (define test-deps '("rackunit-lib"))
